@@ -1,112 +1,32 @@
 <!DOCTYPE html>
-<html lang="id"><head><base target="_top"><meta charset="utf-8">
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>E-Voting OSIS IM Maos 2026-2027</title>
+<meta http-equiv="refresh" content="4; url=https://script.google.com/macros/s/AKfycbyre_aZ761a2oISnfZqwvrwMWjAg9gxbORd-5iqmU78Oy43gM4xYjpx5kFYVvPSpoMmMw/exec">
 <style>
-:root{--p:#0A6C9E;--pd:#064A6E;--l:#E6F3FA;--ok:#0A6C9E;--err:#B00020}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#fff;color:#000;line-height:1.5}
-nav{background:var(--pd);display:flex;gap:6px;align-items:center;padding:10px 16px;flex-wrap:wrap}
-nav b{color:#fff;margin-right:auto;font-size:1.05rem}
-nav button{background:transparent;color:#fff;border:2px solid transparent;padding:8px 14px;border-radius:8px;cursor:pointer;font-size:.95rem}
-nav button.on,nav button:hover{background:#fff;color:#000}
-main{max-width:1000px;margin:0 auto;padding:20px 16px}
-h1,h2,h3{color:#000}h1{border-left:6px solid var(--p);padding-left:12px}
-.card{border:2px solid var(--p);border-radius:14px;padding:16px;background:#fff;margin-bottom:16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.cand{cursor:pointer;text-align:center}.cand.sel{background:var(--l);outline:4px solid var(--p)}
-.cand img,.ph{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;background:var(--l)}
-.no{display:inline-block;background:var(--p);color:#fff;border-radius:50%;width:38px;height:38px;line-height:38px;font-weight:700}
-button.b,label.b{background:var(--p);color:#fff;border:0;padding:11px 18px;border-radius:8px;font-size:1rem;cursor:pointer;display:inline-block}
-button.b:hover{background:var(--pd)}button.b:disabled{opacity:.5}button.g{background:#fff;color:#000;border:2px solid var(--p)}
-input,textarea{width:100%;padding:10px;border:2px solid #7aa9c2;border-radius:8px;font-size:1rem;margin:4px 0 10px;color:#000}
-input:focus,button:focus,textarea:focus{outline:3px solid #000;outline-offset:2px}
-label{font-weight:700;font-size:.9rem}.msg{padding:10px;border-radius:8px;margin:10px 0;background:var(--l);border:1px solid var(--p)}.msg.e{border-color:var(--err);color:var(--err);background:#fff}
-.bar{height:26px;background:var(--l);border-radius:13px;overflow:hidden;margin:4px 0 12px}.bar i{display:block;height:100%;background:var(--p);transition:width .8s}
-.tag{display:inline-block;padding:3px 12px;border-radius:12px;background:var(--p);color:#fff;font-size:.85rem}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}.stats div{background:var(--l);border-radius:10px;padding:10px;text-align:center}.stats b{font-size:1.5rem;display:block}
-dialog{border:3px solid var(--p);border-radius:14px;max-width:520px;width:92%;color:#000}dialog::backdrop{background:rgba(0,0,0,.5)}
-#win{text-align:center;background:var(--l);border:3px solid var(--p)}#win img{width:200px;height:200px;object-fit:cover;border-radius:50%;border:5px solid var(--p)}
-#cf{position:fixed;inset:0;pointer-events:none;z-index:9}
-#pr{display:none}
-@media print{body>*:not(#pr){display:none!important}#pr{display:grid!important;grid-template-columns:1fr 1fr;gap:6mm}
-.cp{border:2px dashed #000;padding:6mm;height:60mm;page-break-inside:avoid;font-size:11pt}.cp h4{margin:0 0 3mm}.cp code{font-size:15pt;font-weight:700;display:block;margin:3mm 0}}
-</style></head><body>
-<nav><b>E-Voting OSIS IM Maos</b><button id="t-v" class="on">Pemilih</button><button id="t-r">Real Count</button><button id="t-a">Admin</button></nav>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;font-family:Arial,Helvetica,sans-serif;background:#fff;color:#000}
+header{background:#064A6E;color:#fff;padding:14px 20px;font-weight:700}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:24px}
+.card{max-width:520px;width:100%;text-align:center;border:3px solid #0A6C9E;border-radius:16px;padding:32px 24px}
+h1{margin:0 0 8px;font-size:1.6rem}
+p{margin:8px 0 20px}
+a.btn{display:inline-block;background:#0A6C9E;color:#fff;text-decoration:none;padding:13px 26px;border-radius:8px;font-size:1.05rem}
+a.btn:hover,a.btn:focus{background:#064A6E;outline:3px solid #000;outline-offset:2px}
+footer{background:#E6F3FA;border-top:3px solid #0A6C9E;text-align:center;padding:14px 16px;font-size:.95rem;color:#000}
+</style>
+</head>
+<body>
+<header>E-Voting OSIS IM Maos</header>
 <main>
-<section id="v"><h1>Ruang Pemilihan</h1>
- <div class="card" id="v1"><label for="tok">Masukkan kode token dari kupon</label><input id="tok" autocomplete="off" placeholder="XXXXX-XXXXX-XXXXX-XXXXX-XXXXXX">
- <button class="b" id="vgo">Masuk</button><div id="vm"></div></div>
- <div id="v2" hidden><p>Klik kartu untuk melihat visi &amp; misi, lalu pilih satu pasangan calon.</p><div class="grid" id="vc"></div><p><button class="b" id="vsub">Pilih &amp; Kirim Suara</button></p><div id="vm2"></div></div>
- <div id="v3" hidden class="card"><h2>Terima kasih!</h2><p id="vdone"></p></div></section>
-<section id="r" hidden><h1>Real Count &amp; Hasil</h1><div id="rb"></div></section>
-<section id="a" hidden><h1>Halaman Admin</h1><div id="ab"></div></section>
+  <div class="card">
+    <h1>Pemilihan Ketua dan Wakil Ketua OSIS 2026-2027</h1>
+    <p>Anda akan diarahkan ke halaman pemilihan dalam beberapa detik.</p>
+    <a class="btn" href="https://script.google.com/macros/s/AKfycbyre_aZ761a2oISnfZqwvrwMWjAg9gxbORd-5iqmU78Oy43gM4xYjpx5kFYVvPSpoMmMw/exec">Buka Halaman Pemilihan</a>
+  </div>
 </main>
-<dialog id="dlg"><div id="dc"></div><p><button class="b g" id="dx">Tutup</button> <button class="b" id="dok">Pilih Pasangan Ini</button></p></dialog>
-<dialog id="cfm"><h3>Konfirmasi pilihan</h3><div id="cc"></div><p>Suara tidak dapat diubah setelah dikirim.</p><p><button class="b g" id="cn">Batal</button> <button class="b" id="cy">Ya, Kirim Suara</button></p></dialog>
-<div id="pr"></div><canvas id="cf"></canvas>
-<script>
-const $=id=>document.getElementById(id);
-const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const api=(fn,...a)=>new Promise((ok,no)=>google.script.run.withSuccessHandler(ok).withFailureHandler(e=>no(new Error((e.message||e).replace(/^Error: /,'')))) [fn](...a));
-let tab='v',timer,sid=null,sel=null,cands=[],token='';
-function show(t){tab=t;['v','r','a'].forEach(x=>{$(x).hidden=x!==t;$('t-'+x).classList.toggle('on',x===t)});clearInterval(timer);
- if(t==='r'){loadR();timer=setInterval(loadR,20000)}if(t==='a')renderA()}
-['v','r','a'].forEach(x=>$('t-'+x).onclick=()=>show(x));
-const person=c=>`<img src="${esc(c.photoUrl)}" alt="Foto pasangan ${c.ballotNumber}" onerror="this.style.visibility='hidden'">`;
-/* Pemilih */
-$('vgo').onclick=async()=>{token=$('tok').value;$('vgo').disabled=true;$('vm').innerHTML='';
- try{const r=await api('validateToken',token);if(!r.ok)$('vm').innerHTML=`<div class="msg e" role="alert">${esc(r.msg)}</div>`;
-  else{cands=r.candidates;sel=null;$('v1').hidden=true;$('v2').hidden=false;
-   $('vc').innerHTML=cands.map(c=>`<div class="card cand" tabindex="0" data-id="${esc(c.candidateId)}">${person(c)}<p><span class="no">${c.ballotNumber}</span></p><h3>${esc(c.chairName)}<br>&amp; ${esc(c.viceName)}</h3><small>Klik untuk visi &amp; misi</small></div>`).join('');
-   document.querySelectorAll('.cand').forEach(e=>{e.onclick=()=>detail(e.dataset.id);e.onkeydown=k=>{if(k.key==='Enter')detail(e.dataset.id)}})}}
- catch(e){$('vm').innerHTML=`<div class="msg e">${esc(e.message)}</div>`}$('vgo').disabled=false};
-function pick(id){sel=id;document.querySelectorAll('.cand').forEach(e=>e.classList.toggle('sel',e.dataset.id===id))}
-function detail(id){const c=cands.find(x=>x.candidateId===id);$('dc').innerHTML=`<h2>Nomor ${c.ballotNumber}</h2><h3>${esc(c.chairName)} &amp; ${esc(c.viceName)}</h3><b>Visi</b><p>${esc(c.vision)}</p><b>Misi</b><p style="white-space:pre-line">${esc(c.mission)}</p>`;
- $('dok').onclick=()=>{pick(id);$('dlg').close()};$('dlg').showModal()}
-$('dx').onclick=()=>$('dlg').close();
-$('vsub').onclick=()=>{if(!sel){$('vm2').innerHTML='<div class="msg e" role="alert">Silakan pilih salah satu pasangan calon.</div>';return}
- const c=cands.find(x=>x.candidateId===sel);$('cc').innerHTML=`<p>Anda memilih <b>Nomor ${c.ballotNumber}: ${esc(c.chairName)} &amp; ${esc(c.viceName)}</b></p>`;$('cfm').showModal()};
-$('cn').onclick=()=>$('cfm').close();
-$('cy').onclick=async()=>{$('cy').disabled=true;
- try{const r=await api('castVote',token,sel);$('cfm').close();
-  if(r.ok){token='';$('tok').value='';$('v2').hidden=true;$('v3').hidden=false;$('vdone').textContent=r.msg}
-  else $('vm2').innerHTML=`<div class="msg e">${esc(r.msg)}</div>`}
- catch(e){$('cfm').close();$('vm2').innerHTML='<div class="msg e">Koneksi bermasalah. Suara belum dipastikan tersimpan. Klik kirim lagi: bila token sudah terpakai, sistem akan memberi tahu.</div>'}
- $('cy').disabled=false};
-/* Real count */
-async function loadR(){try{const d=await api('getPublicData');const mx=Math.max(1,...d.candidates.map(c=>c.votes));
- let h=`<p><b>${esc(d.name)} ${esc(d.period)}</b> <span class="tag">${{NOT_STARTED:'Belum dimulai',IN_PROGRESS:'Berlangsung',FINALIZING:'Menghitung',FINISHED:'Hasil FINAL'}[d.status]}</span></p>
- <p>${d.final?'Hasil final':'Hasil sementara (diperbarui tiap 7 suara sah)'} &bull; Suara dipublikasikan: <b>${d.total}</b> &bull; Pembaruan: ${d.updatedAt?new Date(d.updatedAt).toLocaleString('id-ID'):'-'}</p>`;
- if(d.final&&d.winners){h+=d.tie?`<div class="card" id="win"><h2>SERI</h2><p>Suara tertinggi sama. Ikuti prosedur penyelesaian panitia.</p></div>`:
-  `<div class="card" id="win"><h2>Selamat kepada pemenang!</h2><img src="${esc(d.winners[0].photoUrl)}" alt="Pemenang"><h2>${esc(d.winners[0].chairName)} &amp; ${esc(d.winners[0].viceName)}</h2><p>Nomor urut ${d.winners[0].ballotNumber} &bull; ${d.winners[0].votes} suara</p></div>`}
- h+=d.candidates.map(c=>{const p=d.total?(c.votes*100/d.total).toFixed(1):'0.0';return `<div class="card"><div class="grid" style="grid-template-columns:90px 1fr;align-items:center"><div>${person(c)}</div><div><b>No ${c.ballotNumber}: ${esc(c.chairName)} &amp; ${esc(c.viceName)}</b><div class="bar" role="img" aria-label="${p}%"><i style="width:${c.votes*100/mx}%"></i></div>${c.votes} suara (${p}%)</div></div></div>`}).join('');
- $('rb').innerHTML=h;if(d.final&&d.winners&&!d.tie&&!window.cfd){window.cfd=1;confetti()}}catch(e){$('rb').innerHTML=`<div class="msg e">${esc(e.message)}</div>`}}
-function confetti(){const c=$('cf'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;const cols=['#0A6C9E','#fff','#064A6E','#7ec8e8'];
- const ps=Array.from({length:160},()=>({x:Math.random()*c.width,y:-Math.random()*c.height,r:4+Math.random()*6,v:2+Math.random()*4,c:cols[Math.random()*4|0]}));let n=0;
- (function f(){x.clearRect(0,0,c.width,c.height);ps.forEach(p=>{p.y+=p.v;x.fillStyle=p.c;x.strokeStyle='#064A6E';x.fillRect(p.x,p.y,p.r,p.r*1.6)});if(++n<400)requestAnimationFrame(f);else x.clearRect(0,0,c.width,c.height)})()}
-/* Admin */
-function renderA(){if(!sid){$('ab').innerHTML=`<div class="card"><label for="pw">Password admin</label><input id="pw" type="password"><button class="b" id="lg">Login</button><div id="lm"></div></div>`;
- $('lg').onclick=async()=>{try{const r=await api('adminLogin',$('pw').value);if(r.ok){sid=r.sid;renderA()}else $('lm').innerHTML=`<div class="msg e">${esc(r.msg)}</div>`}catch(e){$('lm').innerHTML=`<div class="msg e">${esc(e.message)}</div>`}};return}
- loadA()}
-async function loadA(note){let s;try{s=await api('adminState',sid)}catch(e){sid=null;return renderA()}
- const st=s.stats,ns=s.status==='NOT_STARTED';
- $('ab').innerHTML=`${note?`<div class="msg">${esc(note)}</div>`:''}<div class="card"><p>Status: <span class="tag">${s.status}</span></p>
- <div class="stats"><div><b>${st.created}</b>Token dibuat</div><div><b>${st.unused}</b>Belum dipakai</div><div><b>${st.used}</b>Terpakai</div><div><b>${st.valid}</b>Suara sah</div><div><b>${st.published}</b>Dipublikasikan</div></div>
- <p><button class="b" id="st" ${ns?'':'disabled'}>Mulai Pemilihan</button> <button class="b g" id="fi" ${s.status==='IN_PROGRESS'?'':'disabled'}>Akhiri Pemilihan</button></p></div>
- <div class="card"><h2>Generator Token &amp; Kupon</h2><label for="n">Jumlah token (maks 500)</label><input id="n" type="number" value="30" min="1" max="500"><button class="b" id="gt" ${s.status==='FINISHED'?'disabled':''}>Buat &amp; Cetak Kupon</button>
- <p><small>Token hanya tampil sekali saat dibuat. Server hanya menyimpan hash-nya.</small></p></div>
- <div class="card"><h2>Kandidat (2-3 pasangan)</h2>${s.candidates.map(c=>`<p><b>No ${c.ballotNumber}</b> ${esc(c.chairName)} &amp; ${esc(c.viceName)} ${ns?`<button class="b g" data-e="${esc(c.candidateId)}">Edit</button> <button class="b g" data-d="${esc(c.candidateId)}">Hapus</button>`:''}</p>`).join('')||'<p>Belum ada kandidat.</p>'}
- ${ns?`<h3 id="ft">Tambah kandidat</h3><input type="hidden" id="cid"><label for="bn">Nomor urut</label><input id="bn" type="number" min="1"><label for="cn2">Nama Ketua</label><input id="cn2"><label for="vn">Nama Wakil</label><input id="vn">
- <label>Foto (diunggah ke Google Drive)</label><input type="file" id="ph" accept="image/png,image/jpeg,image/webp"><input id="pu" placeholder="URL foto (otomatis terisi setelah unggah)">
- <label for="vi">Visi</label><textarea id="vi" rows="2"></textarea><label for="mi">Misi</label><textarea id="mi" rows="4"></textarea><button class="b" id="sv">Simpan Kandidat</button>`:'<p><small>Kandidat terkunci setelah pemilihan dimulai.</small></p>'}</div>`;
- const act=(fn,ok)=>async(...a)=>{try{await api(fn,sid,...a);loadA(ok)}catch(e){loadA('Gagal: '+e.message)}};
- $('st').onclick=()=>act('startElection','Pemilihan dimulai.')();
- $('fi').onclick=()=>{if(confirm('Akhiri pemilihan? Suara baru akan ditolak dan hasil final dikunci.'))act('finishElection','Pemilihan selesai. Hasil final dikunci.')()};
- $('gt').onclick=async()=>{$('gt').disabled=true;try{const t=await api('generateTokens',sid,$('n').value);coupons(t,s)}catch(e){loadA('Gagal: '+e.message)}};
- document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>confirm('Hapus kandidat ini?')&&act('deleteCandidate','Kandidat dihapus.')(b.dataset.d));
- document.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>{const c=s.candidates.find(x=>x.candidateId===b.dataset.e);
-  $('cid').value=c.candidateId;$('bn').value=c.ballotNumber;$('cn2').value=c.chairName;$('vn').value=c.viceName;$('pu').value=c.photoUrl;$('vi').value=c.vision;$('mi').value=c.mission;$('ft').scrollIntoView()});
- if(ns){$('ph').onchange=()=>{const f=$('ph').files[0];if(!f)return;if(f.size>2e6){alert('Maks 2 MB');return}const r=new FileReader();
-  r.onload=async()=>{try{$('pu').value='Mengunggah...';$('pu').value=await api('uploadPhoto',sid,f.name,f.type,r.result.split(',')[1])}catch(e){$('pu').value='';alert(e.message)}};r.readAsDataURL(f)};
-  $('sv').onclick=()=>act('saveCandidate','Kandidat disimpan.')({candidateId:$('cid').value,ballotNumber:$('bn').value,chairName:$('cn2').value,viceName:$('vn').value,photoUrl:$('pu').value,vision:$('vi').value,mission:$('mi').value,isActive:true})}}
-function coupons(t){$('pr').innerHTML=t.map(k=>`<div class="cp"><h4>Pemilihan Ketua &amp; Wakil Ketua OSIS<br>SMP IT Insan Mulia Maos ${'2026-2027'}</h4><code>${k}</code><small>Buka halaman pemilihan, pilih menu Pemilih, masukkan kode ini. Kode hanya berlaku satu kali. Jangan tunjukkan kepada siapa pun.</small></div>`).join('');
- window.print();setTimeout(()=>{$('pr').innerHTML='';loadA('Kupon dibuat. Token mentah sudah dihapus dari layar.')},1500)}
-</script></body></html>
+<footer><b>SMP IT INSAN MULIA MAOS</b> - Amanah, Jujur, dan Adil untuk Pemilihan OSIS Tahun 2026.</footer>
+</body>
+</html>
